@@ -1,0 +1,29 @@
+{
+  "name": "ginnx",
+  "version": "1.0.0",
+  "description": "🎗 Generate Nginx configuration files from NodeJS projects",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/davidgatti/ginnx"
+  },
+  "bin": {
+    "ginnx": "./index.js"
+  },
+  "keywords": [
+    "ginnx",
+    "nginx",
+    "configuration",
+    "cli",
+    "david gatti"
+  ],
+  "author": {
+    "name": "David Gatti",
+    "email": "npm@gatti.pl",
+    "url": "https://github.com/davidgatti"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "terminal-kit": "^1.11.1"
+  }
+}
