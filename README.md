@@ -1,6 +1,6 @@
 # ginnx
 
-🎗 Generate Nginx configuration files from NodeJS projects
+🎗 Generate Nginx configuration files based on the user input
 
 # The End
 
