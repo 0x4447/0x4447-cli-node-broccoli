@@ -1,6 +1,17 @@
-# ginnx
+# giNnx
 
-🎗 Generate Nginx configuration files based on the user input
+If you are a developer with a local Nginx setup like [mine](https://github.com/davidgatti/my-development-setup/tree/master/05_custom_domains), and like to give the sites that you work on a local domain name, then for sure you experienced the tedious work of creating a Nginx config file, copy it in the right place and restart Nginx to load the new configuration.
+
+To stream line this process, I decided to make my life bit simpler by creating this small CLI to automate this process.
+
+Once installed globally you just run `ginnx`, and follow the instructions on the screen. The app will do the following for you:
+
+- Ask the right questions ;)
+- Create a config file
+- Save it in to the Nginx directory
+- Restart Nginx
+
+I hope you'll find this app useful, and don't forget to check the source code. I took the time to write simple to understand code, so you can extend or customize the app to fit your needs.
 
 # The End
 
