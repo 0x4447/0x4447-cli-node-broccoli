@@ -1,3 +1,10 @@
+[![downloads][downloads-badge]][npm-stat]
+
+[downloads-badge]: https://img.shields.io/npm/dm/ginnx.svg?style=flat-square
+[npm-stat]: http://npm-stat.com/charts.html?package=ginnx&from=2016-04-01
+
+---
+
 # giNnx
 
 If you are a developer with a local Nginx setup like [mine](https://github.com/davidgatti/my-development-setup/tree/master/05_custom_domains), and like to give the sites that you work on a local domain name, then for sure you experienced the tedious work of creating a Nginx config file, copy it in the right place and restart Nginx to load the new configuration.
@@ -22,8 +29,6 @@ If you've enjoyed this article/project, please consider giving it a 🌟 or dona
 - [![Watch on GitHub](https://img.shields.io/github/watchers/davidgatti/ginnx.svg?style=social)](https://github.com/davidgatti/ginnx/watchers)
 
 Also check out my [GitHub account](https://github.com/davidgatti), where I have other articles and apps that you might find interesting.
-
----
 
 ## Where to follow
 

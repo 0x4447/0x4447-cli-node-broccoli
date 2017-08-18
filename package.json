@@ -24,6 +24,6 @@
   },
   "license": "MIT",
   "dependencies": {
-    "terminal-kit": "^1.11.1"
+    "terminal-kit": "1.11.1"
   }
 }
