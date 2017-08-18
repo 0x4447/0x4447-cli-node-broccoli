@@ -1,6 +1,6 @@
 {
   "name": "ginnx",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "🎗 Generate Nginx configuration files from NodeJS projects",
   "main": "index.js",
   "repository": {
