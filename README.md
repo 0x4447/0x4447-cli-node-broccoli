@@ -13,6 +13,10 @@ Once installed globally you just run `broccoli`, and follow the instructions on 
 
 We hope you'll find this app useful, and don't forget to check the source code. We took the time to write simple to understand code, so you can extend or customize the app to fit your needs.
 
+# Why This Name?
+
+Why not? We had to call it something. And once you see it, you're not going to forget it. 😃
+
 # The End
 
 If you enjoyed this project, please consider giving it a 🌟. And check out our [0x4447 GitHub account](https://github.com/0x4447), where we have additional articles and tools that you might find interesting.
