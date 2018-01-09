@@ -1,26 +1,26 @@
 {
-  "name": "ginnx",
+  "name": "broccoli",
   "version": "1.0.3",
-  "description": "🎗 Generate Nginx configuration files from NodeJS projects",
+  "description": "🥦 Generate Nginx configuration files based on the user input",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/davidgatti/ginnx"
+    "url": "https://github.com/0x4447/0x4447-node-cli-broccoli"
   },
   "bin": {
-    "ginnx": "./index.js"
+    "broccoli": "./index.js"
   },
   "keywords": [
     "ginnx",
     "nginx",
     "configuration",
     "cli",
-    "david gatti"
+    "0x4447"
   ],
   "author": {
-    "name": "David Gatti",
-    "email": "npm@gatti.pl",
-    "url": "https://github.com/davidgatti"
+    "name": "0x4447",
+    "email": "hello@0x4447.com",
+    "url": "https://0x4447.com"
   },
   "license": "MIT",
   "dependencies": {
