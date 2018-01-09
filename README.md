@@ -1,28 +1,21 @@
-[![downloads][downloads-badge]][npm-stat]
+# 🥦 Broccoli
 
-[downloads-badge]: https://img.shields.io/npm/dm/ginnx.svg?style=flat-square
-[npm-stat]: http://npm-stat.com/charts.html?package=ginnx&from=2016-04-01
+If you are a developer with a local Nginx setup like [ours](https://github.com/davidgatti/my-development-setup/tree/master/05_custom_domains), and like to give the sites that you work on a local domain name, then for sure you experienced the tedious work of creating a Nginx config file, copy it in the right place and restart Nginx to load the new configuration.
 
----
+To stream line this process, we decided to make our life bit simpler by creating this small CLI to automate this process.
 
-# giNnx
-
-If you are a developer with a local Nginx setup like [mine](https://github.com/davidgatti/my-development-setup/tree/master/05_custom_domains), and like to give the sites that you work on a local domain name, then for sure you experienced the tedious work of creating a Nginx config file, copy it in the right place and restart Nginx to load the new configuration.
-
-To stream line this process, I decided to make my life bit simpler by creating this small CLI to automate this process.
-
-Once installed globally you just run `ginnx`, and follow the instructions on the screen. The app will do the following for you:
+Once installed globally you just run `broccoli`, and follow the instructions on the screen. The app will do the following for you:
 
 - Ask the right questions ;)
 - Create a config file
 - Save it in to the Nginx directory
 - Restart Nginx
 
-I hope you'll find this app useful, and don't forget to check the source code. I took the time to write simple to understand code, so you can extend or customize the app to fit your needs.
+We hope you'll find this app useful, and don't forget to check the source code. We took the time to write simple to understand code, so you can extend or customize the app to fit your needs.
 
 # The End
 
-If you enjoyed this article/project, please consider giving it a 🌟. And check out our [0x4447 GitHub account](https://github.com/0x4447), where we have additional articles and tools that you might find interesting.
+If you enjoyed this project, please consider giving it a 🌟. And check out our [0x4447 GitHub account](https://github.com/0x4447), where we have additional articles and tools that you might find interesting.
 
 # For Hire 👨‍💻
 
