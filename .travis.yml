@@ -1,16 +1,16 @@
 language: node_js
-
 node_js:
-  - 8
-  - 7
-
+- 8
+- 7
 script:
-  - make test
-
+- make test
 deploy:
   provider: npm
-  email: hello@0x4447.com
+  email: hello@gatti.pl
+  api_key:
+    secure: Fi/iq6x6wxa1/prpb2VhObTcTU7ecdCynPzNpDYzX8wOUWCQ0Mh6+3W2Ylni0G2UkOo7e8PLHAjzCwZgJIzy6FvztawzWJ+AK2YbPDcXjuwDo1tT2QHbjP/nugQ9njWke2yqHASxJLEHJkZYS/0mh+dCzXF6cdP6541NPTh3agFbGInOMo/N+6v77xqJh6WWhrLqOjeM4ED9JqL8Z0GuKAh5HYCVmq5f0z5syxOm8vVFyFt5f9/s0HL12PXMEBvDv96078dAAgI/LV45xcf3rN7epV2LxknHfW2h3d6Ux7QGEFo9sTpoRySltf0bxn1Au0aLLfinFiJ2vReze+eRxj7jjCzntUt2VBzblddOweZ0HJRT1MS2nO9CQWlhATI8JNPxCx9eXcdLWKZRQDsT2oFyMBPte7ftjUNfwSnxcM7EORN037HqT0pwUDN03dC80Dm+smqOE+YyeMEffqtjRa8mAdHJEnWPhDUzv1qCIznU/Bu+ktpCa0+wQLNRWAISXASBALfOrNtbVCVUpUPjAsHWafzERkkzl7c3DyDV0FF8ULiGQs4QIyfuXpFXA6gUXYS3TdqiXbylo0hXsgy7i07XzG3udBmoZgu7mX7hW0qhK0V5u0VhTxGUCniCgeMiebERydAwrvFmVkhrZCAh6CWvBNAN8GMix7OLqL+gDZo=
   on:
-    tags: true
+    tags: false
+    branch: master
     repo: 0x4447/0x4447-node-cli-broccoli
-    node_js: "8"
+    node_js: '8'
