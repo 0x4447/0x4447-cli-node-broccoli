@@ -1,0 +1,16 @@
+language: node_js
+
+node_js:
+  - 8
+  - 7
+
+script:
+  - make test
+
+deploy:
+  provider: npm
+  email: hello@0x4447.com
+  on:
+    tags: true
+    repo: 0x4447/0x4447-node-cli-broccoli
+    node_js: "8"

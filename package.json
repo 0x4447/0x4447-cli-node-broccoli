@@ -1,8 +1,11 @@
 {
-  "name": "broccoli",
-  "version": "1.0.3",
+  "name": "@0x4447/broccoli",
+  "version": "1.0.0",
   "description": "🥦 Generate Nginx configuration files based on the user input",
   "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/0x4447/0x4447-node-cli-broccoli"
@@ -24,6 +27,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "mocha": "^4.1.0",
     "terminal-kit": "1.11.1"
   }
 }
