@@ -27,7 +27,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "mocha": "^4.1.0",
+    "mocha": "4.1.0",
     "terminal-kit": "1.11.1"
   }
 }
