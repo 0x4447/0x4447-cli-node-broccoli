@@ -10,6 +10,8 @@ To stream line this process, we decided to make our life bit simpler by creating
 sudo npm install -g @0x4447/broccoli
 ```
 
+# Usage
+
 Once installed globally you just run `broccoli`, and follow the instructions on the screen. The app will do the following for you:
 
 - Ask the right questions ;)
