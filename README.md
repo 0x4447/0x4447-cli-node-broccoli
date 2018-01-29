@@ -4,6 +4,12 @@ If you are a developer with a local Nginx setup like [ours](https://github.com/d
 
 To stream line this process, we decided to make our life bit simpler by creating this small CLI to automate this process.
 
+# How to Install
+
+```
+sudo npm install -g @0x4447/broccoli
+```
+
 Once installed globally you just run `broccoli`, and follow the instructions on the screen. The app will do the following for you:
 
 - Ask the right questions ;)

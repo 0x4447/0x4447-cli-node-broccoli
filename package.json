@@ -1,6 +1,6 @@
 {
   "name": "@0x4447/broccoli",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "🥦 Generate Nginx configuration files based on the user input",
   "main": "index.js",
   "scripts": {
