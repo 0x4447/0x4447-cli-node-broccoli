@@ -28,11 +28,11 @@
     "url": "https://github.com/0x4447/0x4447-cli-node-broccoli/issues"
   },
   "keywords": [
-    "0x4447"
+    "0x4447",
     "cli",
     "ginnx",
     "nginx",
-    "configuration",
+    "configuration"
   ],
   "dependencies": {
     "mocha": "4.1.0",
