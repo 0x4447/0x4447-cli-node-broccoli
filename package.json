@@ -1,9 +1,14 @@
 {
   "name": "@0x4447/broccoli",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "🥦 Generate Nginx configuration files based on the user input",
+  "homepage": "https://0x4447.com/toolbox",
   "main": "index.js",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
+    "build": "npm pack && npm install -g 0x4447-broccoli-* && rm 0x4447-broccoli-*",
     "test": "mocha"
   },
   "repository": {
@@ -13,19 +18,22 @@
   "bin": {
     "broccoli": "./index.js"
   },
-  "keywords": [
-    "ginnx",
-    "nginx",
-    "configuration",
-    "cli",
-    "0x4447"
-  ],
   "author": {
     "name": "0x4447",
-    "email": "hello@0x4447.com",
+    "email": "hello@0x4447.email",
     "url": "https://0x4447.com"
   },
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/0x4447/0x4447-cli-node-broccoli/issues"
+  },
+  "keywords": [
+    "0x4447"
+    "cli",
+    "ginnx",
+    "nginx",
+    "configuration",
+  ],
   "dependencies": {
     "mocha": "4.1.0",
     "terminal-kit": "1.11.1"
