@@ -12,5 +12,5 @@ deploy:
   on:
     tags: false
     branch: master
-    repo: 0x4447/0x4447-node-cli-broccoli
+    repo: 0x4447/0x4447-cli-node-broccoli
     node_js: '8'
