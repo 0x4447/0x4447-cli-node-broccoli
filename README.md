@@ -10,9 +10,15 @@ To stream line this process, we decided to make our life bit simpler by creating
 sudo npm install -g @0x4447/broccoli
 ```
 
-# Usage
+# How to Use
 
-Once installed globally you just run `broccoli`, and follow the instructions on the screen. The app will do the following for you:
+```
+sudo broccoli
+```
+
+# What to expect
+
+Follow the instructions on the screen. The app will do the following for you:
 
 - Ask the right questions ;)
 - Create a config file
@@ -31,4 +37,4 @@ If you enjoyed this article/project, please consider giving it a 🌟. And check
 
 # For Hire 👨‍💻 👩‍💻
 
-If you'd like us to help you with something, please feel free to say hello@0x4447.com, and share what's on your mind. We'll take a look, and try our best to help you. Or visit our website at: [0x4447.com](https://0x4447.com).
+If you'd like us to help you with something, please feel free to say hello@0x4447.email, and share what's on your mind. We'll take a look, and try our best to help you. Or visit our website at: [0x4447.com](https://0x4447.com).
