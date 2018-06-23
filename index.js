@@ -40,6 +40,30 @@ program.on('--help', function() {
 //
 program.parse(process.argv);
 
+//
+//	Listen for key preses
+//
+term.on('key', function(name, matches, data ) {
+
+	//
+	//	1.	If we detect CTR+C we kill the app
+	//
+	if(name === 'CTRL_C' )
+	{
+		//
+		//	1. 	Lets make a nice user experience and clean the terminal window
+		//		before closing the app
+		//
+		term.clear();
+
+		//
+		//	->	Kill the app
+		//
+		process.exit();
+	}
+
+});
+
 //	 __  __              _____   _   _
 //	|  \/  |     /\     |_   _| | \ | |
 //	| \  / |    /  \      | |   |  \| |
