@@ -237,7 +237,8 @@ function ask_for_url(container)
 		//
 		//	1.	Ask input from the user
 		//
-		term.yellow("Please enter the site URL: ");
+		term("\n");
+		term.yellow("\tPlease enter the site URL: ");
 
 		//
 		//	2.	Process the user input
@@ -269,7 +270,8 @@ function ask_for_the_port(container)
 		//
 		//	1.	Ask input from the user
 		//
-		term.yellow("\nPlease enter the site PORT: ");
+		term("\n");
+		term.yellow("\tPlease enter the site PORT: ");
 
 		//
 		//	2.	Process the user input
