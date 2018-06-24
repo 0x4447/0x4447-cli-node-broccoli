@@ -19,8 +19,7 @@ let program = require('commander');
 //	The CLI options for this app.
 //
 program
-	.version(npm.version)
-	.parse(process.argv);
+	.version(npm.version);
 
 //
 //	React when the user needs help
