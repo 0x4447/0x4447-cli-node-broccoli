@@ -1,6 +1,6 @@
 {
   "name": "@0x4447/broccoli",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "🥦 Generate Nginx configuration files based on the user input",
   "homepage": "https://0x4447.com/toolbox",
   "main": "index.js",
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/0x4447/0x4447-node-cli-broccoli"
+    "url": "https://github.com/0x4447/0x4447-cli-node-broccoli"
   },
   "bin": {
     "broccoli": "./index.js"
@@ -35,7 +35,7 @@
     "configuration"
   ],
   "dependencies": {
-    "commander": "^2.15.1",
+    "commander": "2.15.1",
     "mocha": "4.1.0",
     "terminal-kit": "1.11.1"
   }
