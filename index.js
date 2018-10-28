@@ -7,6 +7,9 @@ let term = require('terminal-kit').terminal;
 let exec = require('child_process').exec;
 let program = require('commander');
 
+let server = require('./chains/server');
+let static = require('./chains/static');
+
 //   _____   ______   _______   _______   _____   _   _    _____    _____
 //  / ____| |  ____| |__   __| |__   __| |_   _| | \ | |  / ____|  / ____|
 // | (___   | |__       | |       | |      | |   |  \| | | |  __  | (___
@@ -293,50 +296,58 @@ function ask_for_the_port(container)
 }
 
 //
-//	After we have all the data we can create the config file for the site.
+//	Based on the user selection we need to split and perform just the selected
+//	action requested by the user.
 //
-function create_the_file(container)
+function for_in_the_road(container)
 {
 	return new Promise(function(resolve, reject) {
 
 		//
-		//	1.	Create an empty array where the content of the file will be
-		//		stored
+		//	>>> Branch off and create a configuration file for servers.
 		//
-		let file = [];
+		if()
+		{
+			server(container)
+				.then(function(container) {
+
+					//
+					//	-> Move to the next chain.
+					//
+					return resolve(container);
+
+				}).catch(function(error) {
+
+					//
+					//	-> Surface the error.
+					//
+					return reject(error);
+
+				});
+		}
 
 		//
-		//	2.	Add data to the array, which in the end will be used to create
-		//		the .service file
+		//	>>>	Branch off and create a configuration file for static sites.
 		//
-		file.push("server {");
-		file.push("\tlisten 80;");
-		file.push("\tlisten [::]:80;");
-		file.push("");
-		file.push("\tserver_name " + container.url + ";");
-		file.push("");
-		file.push("\tlocation / {");
-		file.push("\t\tproxy_pass http://localhost:" + container.port + ";");
-		file.push("\t\tproxy_set_header  X-Real-IP  $remote_addr;");
-		file.push("\t\tproxy_set_header Host $host;");
-		file.push("\t}");
-		file.push("}");
+		if()
+		{
+			static(container)
+				.then(function(container) {
 
-		//
-		//	3.	Join each element of the array in to one big file where each
-		//		element is in its own line
-		//
-		let config_file = file.join("\n");
+						//
+						//	-> Move to the next chain.
+						//
+						return resolve(container);
 
-		//
-		//	4.	Save the file in to memory
-		//
-		container.config_file = config_file;
+					}).catch(function(error) {
 
-		//
-		//	-> Move to the next chain
-		//
-		return resolve(container);
+						//
+						//	-> Surface the error.
+						//
+						return reject(error);
+
+					});
+		}
 
 	});
 }
