@@ -7,6 +7,9 @@ let term = require('terminal-kit').terminal;
 let exec = require('child_process').exec;
 let program = require('commander');
 
+let server = require('./chains/server');
+let static = require('./chains/static');
+
 //   _____   ______   _______   _______   _____   _   _    _____    _____
 //  / ____| |  ____| |__   __| |__   __| |_   _| | \ | |  / ____|  / ____|
 // | (___   | |__       | |       | |      | |   |  \| | | |  __  | (___
@@ -19,19 +22,18 @@ let program = require('commander');
 //	The CLI options for this app.
 //
 program
-	.version(npm.version);
+    .version(npm.version)
+    .option('-s, --source <path>', 'source of project to deliver');
 
 //
 //	React when the user needs help
 //
 program.on('--help', function() {
-
-	//
-	//	Just add an empty line at the end of the help to make the text more
-	//	clear to the user
-	//
-	console.log("");
-
+    //
+    //	Just add an empty line at the end of the help to make the text more
+    //	clear to the user
+    //
+    console.log('');
 });
 
 //
@@ -42,25 +44,23 @@ program.parse(process.argv);
 //
 //	Listen for key preses
 //
-term.on('key', function(name, matches, data ) {
+term.on('key', function(name, matches, data) {
+    //
+    //	1.	If we detect CTR+C we kill the app
+    //
+    if (name === 'CTRL_C')
+    {
+        //
+        //	1. 	Lets make a nice user experience and clean the terminal window
+        //		before closing the app
+        //
+        term.clear();
 
-	//
-	//	1.	If we detect CTR+C we kill the app
-	//
-	if(name === 'CTRL_C' )
-	{
-		//
-		//	1. 	Lets make a nice user experience and clean the terminal window
-		//		before closing the app
-		//
-		term.clear();
-
-		//
-		//	->	Kill the app
-		//
-		process.exit();
-	}
-
+        //
+        //	->	Kill the app
+        //
+        process.exit();
+    }
 });
 
 //	 __  __              _____   _   _
@@ -72,89 +72,88 @@ term.on('key', function(name, matches, data ) {
 //
 
 //
-//	1.	Crate an empty container where the data will be passed in each chain
+//	1.	Crate a container where the data will be passed in each chain
 //		reaction
 //
-let container = {}
+let container = {
+    source_path: program.source
+};
 
 //
 //	2.	Make sure we are root
 //
 check_if_we_are_root(container)
-	.then(function(container){
+    .then(function(container) {
+        //
+        //	1.	Make sure Nginx is present
+        //
+        return check_if_nginx_is_present(container);
+    })
+    .then(function(container) {
+        //
+        //	1.	Ask for the URL
+        //
+        return ask_for_url(container);
+    })
+    .then(function(container) {
+        //
+        //	1.	Ask for the PORT
+        //
+        return ask_for_the_port(container);
+    })
+    .then(function(container) {
+        //
+        //  1. Ask for the source
+        //
+        return ask_for_source(container);
+    })
+    .then(function(container) {
+        //
+        //  1. Fork off to handle the source-type correctly
+        //
+        return fork_in_the_road(container);
+    })
+    .then(function(container) {
+        //
+        //	1.	Save the file
+        //
+        return save_the_file(container);
+    })
+    .then(function(container) {
+        //
+        //	1.	Restart Nginx
+        //
+        return restart_nginx(container);
+    })
+    .then(function(container) {
+        //
+        //	1.	Let the user know all went well
+        //
+        term('\n');
+        term('\n');
+        term.green('\tNginx restarted');
+        term('\n');
+        term('\n');
 
-		//
-		//	1.	Make sure Nginx is present
-		//
-		return check_if_nginx_is_present(container);
+        //
+        //	->	Exit the app
+        //
+        process.exit(0);
+    })
+    .catch(function(error) {
+        //
+        //	1.	Show the error message
+        //
+        term.red('\n');
+        term.red('\t' + error.message);
+        term.red('\n');
+        term.red('\n');
 
-	}).then(function(container){
-
-		//
-		//	1.	Ask for the URL
-		//
-		return ask_for_url(container);
-
-	}).then(function(container){
-
-		//
-		//	1.	Ask for the PORT
-		//
-		return ask_for_the_port(container);
-
-	}).then(function(container){
-
-		//
-		//	1.	Generate the file
-		//
-		return create_the_file(container);
-
-	}).then(function(container){
-
-		//
-		//	1.	Save the file
-		//
-		return save_the_file(container);
-
-	}).then(function(container){
-
-		//
-		//	1.	Restart Nginx
-		//
-		return restart_nginx(container);
-
-	}).then(function(container){
-
-		//
-		//	1.	Let the user know all went well
-		//
-		term("\n");
-		term("\n");
-		term.green("\tNginx restarted");
-		term("\n");
-		term("\n");
-
-		//
-		//	->	Exit the app
-		//
-		process.exit(0);
-
-	}).catch(function(error){
-
-		//
-		//	1.	Show the error message
-		//
-		term.red("\n");
-		term.red("\t" + error.message);
-		term.red("\n");
-		term.red("\n");
-
-		//
-		//	-> Exit the app
-		//
-		process.exit(0);
-
-	});
+        //
+        //	-> Exit the app
+        //
+        process.exit(0);
+    });
 
 //	 _____    _____     ____    __  __   _____    _____   ______    _____
 //	|  __ \  |  __ \   / __ \  |  \/  | |_   _|  / ____| |  ____|  / ____|
@@ -172,236 +171,240 @@ check_if_we_are_root(container)
 //	- save the file in to the Nginx directory
 //	- Restart Nginx
 //
-function check_if_we_are_root(container)
-{
-	return new Promise(function(resolve, reject) {
+function check_if_we_are_root(container) {
+    return new Promise(function(resolve, reject) {
+        //
+        //	1.	Check if the SystemD directory exists
+        //
+        let username = os.userInfo().username;
 
-		//
-		//	1.	Check if the SystemD directory exists
-		//
-		let username = os.userInfo().username;
+        //
+        //	2.	Warn the user that the directory is not present
+        //
+        if (username != 'root')
+        {
+            return reject(new Error('Run the command as root'));
+        }
 
-		//
-		//	2.	Warn the user that the directory is not present
-		//
-		if(username != "root")
-		{
-			return reject(new Error("Run the command as root"));
-		}
-
-		//
-		//	-> Move to the next chain
-		//
-		return resolve(container);
-
-	});
+        //
+        //	-> Move to the next chain
+        //
+        return resolve(container);
+    });
 }
 
 //
 //	Make sure the Nginx folder exists and is preset so we can save our
 //	config file
 //
-function check_if_nginx_is_present(container)
-{
-	return new Promise(function(resolve, reject) {
+function check_if_nginx_is_present(container) {
+    return new Promise(function(resolve, reject) {
+        //
+        //	1.	Check if the SystemD directory exists
+        //
+        let is_systemd = fs.existsSync('/etc/nginx/sites-enabled');
 
-		//
-		//	1.	Check if the SystemD directory exists
-		//
-		let is_systemd = fs.existsSync("/etc/nginx/sites-enabled");
+        //
+        //	2.	Warn the user that the directory is not present
+        //
+        if (!is_systemd)
+        {
+            return reject(new Error('NGINX Error'));
+        }
 
-		//
-		//	2.	Warn the user that the directory is not present
-		//
-		if(!is_systemd)
-		{
-			return reject(new Error("NGINX Error"));
-		}
-
-		//
-		//	-> Move to the next chain
-		//
-		return resolve(container);
-
-	});
+        //
+        //	-> Move to the next chain
+        //
+        return resolve(container);
+    });
 }
 
 //
 //	Ask the user for the URL of the site.
 //
-function ask_for_url(container)
-{
-	return new Promise(function(resolve, reject) {
+function ask_for_url(container) {
+    return new Promise(function(resolve, reject) {
+        //
+        //	1.	Ask input from the user
+        //
+        term('\n');
+        term.yellow('\tPlease enter the site URL: ');
 
-		//
-		//	1.	Ask input from the user
-		//
-		term("\n");
-		term.yellow("\tPlease enter the site URL: ");
+        //
+        //	2.	Process the user input
+        //
+        term.inputField({}, function(error, url) {
+            //
+            //	1.	Save the URL
+            //
+            container.url = url;
 
-		//
-		//	2.	Process the user input
-		//
-		term.inputField({}, function(error, url) {
-
-			//
-			//	1.	Save the URL
-			//
-			container.url = url;
-
-			//
-			//	-> Move to the next chain
-			//
-			return resolve(container);
-
-		});
-
-	});
+            //
+            //	-> Move to the next chain
+            //
+            return resolve(container);
+        });
+    });
 }
 
 //
 //	Ask for the port at which the site will be running
 //
-function ask_for_the_port(container)
-{
-	return new Promise(function(resolve, reject) {
+function ask_for_the_port(container) {
+    return new Promise(function(resolve, reject) {
+        //
+        //	1.	Ask input from the user
+        //
+        term('\n');
+        term.yellow('\tPlease enter the site PORT: ');
 
-		//
-		//	1.	Ask input from the user
-		//
-		term("\n");
-		term.yellow("\tPlease enter the site PORT: ");
+        //
+        //	2.	Process the user input
+        //
+        term.inputField({}, function(error, port) {
+            //
+            //	1.	Save the PORT
+            //
+            container.port = port;
 
-		//
-		//	2.	Process the user input
-		//
-		term.inputField({}, function(error, port) {
-
-			//
-			//	1.	Save the PORT
-			//
-			container.port = port;
-
-			//
-			//	-> Move to the next chain
-			//
-			return resolve(container);
-
-		});
-
-	});
+            //
+            //	-> Move to the next chain
+            //
+            return resolve(container);
+        });
+    });
 }
 
 //
-//	After we have all the data we can create the config file for the site.
+//	Ask for the source of the site.
 //
-function create_the_file(container)
-{
-	return new Promise(function(resolve, reject) {
+function ask_for_source(container) {
+    return new Promise(function(resolve, reject) {
+        //
+        //	1.	Ask input from the user
+        //
+        term('\n');
+        term.yellow(
+            '\tAre you planning to deliver a static site or route to ' +
+                ' a web server? (static/server): '
+        );
 
-		//
-		//	1.	Create an empty array where the content of the file will be
-		//		stored
-		//
-		let file = [];
+        //
+        //	2.	Process the user input
+        //
+        term.inputField({}, function(error, source) {
+            //
+            //	1.	Save the URL
+            //
+            container.source = source;
 
-		//
-		//	2.	Add data to the array, which in the end will be used to create
-		//		the .service file
-		//
-		file.push("server {");
-		file.push("\tlisten 80;");
-		file.push("\tlisten [::]:80;");
-		file.push("");
-		file.push("\tserver_name " + container.url + ";");
-		file.push("");
-		file.push("\tlocation / {");
-		file.push("\t\tproxy_pass http://localhost:" + container.port + ";");
-		file.push("\t\tproxy_set_header  X-Real-IP  $remote_addr;");
-		file.push("\t\tproxy_set_header Host $host;");
-		file.push("\t}");
-		file.push("}");
+            //
+            //	-> Move to the next chain
+            //
+            return resolve(container);
+        });
+    });
+}
 
-		//
-		//	3.	Join each element of the array in to one big file where each
-		//		element is in its own line
-		//
-		let config_file = file.join("\n");
+//
+//	Based on the user selection we need to split and perform just the selected
+//	action requested by the user.
+//
+function fork_in_the_road(container) {
+    return new Promise(function(resolve, reject) {
+        //
+        //	>>> Branch off and create a configuration file for servers.
+        //
+        if (container.source === 'server')
+        {
+            server(container)
+                .then(function(container) {
+                    //
+                    //	-> Move to the next chain.
+                    //
+                    return resolve(container);
+                })
+                .catch(function(error) {
+                    //
+                    //	-> Surface the error.
+                    //
+                    return reject(error);
+                });
+        }
 
-		//
-		//	4.	Save the file in to memory
-		//
-		container.config_file = config_file;
-
-		//
-		//	-> Move to the next chain
-		//
-		return resolve(container);
-
-	});
+        //
+        //	>>>	Branch off and create a configuration file for static sites.
+        //
+        if (container.source === 'static')
+        {
+            static(container)
+                .then(function(container) {
+                    //
+                    //	-> Move to the next chain.
+                    //
+                    return resolve(container);
+                })
+                .catch(function(error) {
+                    //
+                    //	-> Surface the error.
+                    //
+                    return reject(error);
+                });
+        }
+    });
 }
 
 //
 //	Save the config file in the right place
 //
-function save_the_file(container)
-{
-	return new Promise(function(resolve, reject) {
+function save_the_file(container) {
+    return new Promise(function(resolve, reject) {
+        //
+        //	1.	Create the path the file will be stored in
+        //
+        let file = '/etc/nginx/sites-enabled/' + container.url;
 
-		//
-		//	1.	Create the path the file will be stored in
-		//
-		let file = "/etc/nginx/sites-enabled/" + container.url
+        //
+        //	2.	Save the data in to the .env file.
+        //
+        fs.writeFile(file, container.config_file, error => {
+            //
+            //	1.	Make sure we show any error
+            //
+            if (error)
+            {
+                return reject(error);
+            }
 
-		//
-		//	2.	Save the data in to the .env file.
-		//
-		fs.writeFile(file, container.config_file, (error) => {
-
-			//
-			//	1.	Make sure we show any error
-			//
-			if(error)
-			{
-				return reject(error);
-			}
-
-			//
-			//	-> Move to the next chain
-			//
-			return resolve(container);
-
-		});
-
-	});
+            //
+            //	-> Move to the next chain
+            //
+            return resolve(container);
+        });
+    });
 }
 
 //
 //	Restart Nginx so we can start using our site.
 //
-function restart_nginx(container)
-{
-	return new Promise(function(resolve, reject) {
+function restart_nginx(container) {
+    return new Promise(function(resolve, reject) {
+        //
+        //	1.	Execute the command that will restart Nginx server
+        //
+        exec('systemctl restart nginx', function(error, stdout, stderr) {
+            //
+            //	1.	Make sure we show any error
+            //
+            if (error)
+            {
+                return reject(new Error(error));
+            }
 
-		//
-		//	1.	Execute the command that will restart Nginx server
-		//
-		exec('systemctl restart nginx', function(error, stdout, stderr) {
-
-			//
-			//	1.	Make sure we show any error
-			//
-			if(error)
-			{
-				return reject(new Error(error))
-			}
-
-			//
-			//	-> Move to the next chain
-			//
-			return resolve(container);
-
-		});
-
-	});
+            //
+            //	-> Move to the next chain
+            //
+            return resolve(container);
+        });
+    });
 }
