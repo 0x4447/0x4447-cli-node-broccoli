@@ -16,6 +16,12 @@ To stream line this process, we decided to make our life bit simpler by creating
 ] sudo broccoli
 ```
 
+# Where to get Help
+
+```
+] broccoli -h
+```
+
 # What to Expect
 
 Follow the instructions on the screen. The app will do the following for you:
