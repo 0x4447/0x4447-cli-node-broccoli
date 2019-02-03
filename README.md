@@ -1,51 +1,51 @@
 # 🥦 Broccoli
 
-If you are a developer with a local Nginx setup, to deliver local web pages with custom local domain names to mimic a real world scenario, then for sure you experienced the tedious work of creating Nginx config files: copy an paste a template, change the new file, save it, reload the Nginx configuration file and and restart the server itself.
+If you're a developer with a local Nginx setup for the purpose of delivering local web pages with custom local domain names to mimic a real world scenario, you've definitely experienced the tedious work involved in creating Nginx config files: copy and paste a template, change the new file, save the file, reload the Nginx configuration file, and restart the server.
 
-Doing this in todays day and age where we get dozens of micro servers is truly a pain.
+In this day and age, doing this with dozens of micro servers is truly a pain.
 
-To stream line this process, we decided to make our life bit simpler by creating this small CLI to automate this tedious process.
+We decided to streamline the process and make our lives a bit simpler by creating this small CLI that automates everything.
 
-We hope you'll find Broccoli useful as we do.
+We hope you'll find Broccoli as useful as we do.
 
-# How to Install
+# How to install
 
 ```
 ] sudo npm install -g @0x4447/broccoli
 ```
 
-# How to Use
+# How to use
 
 ```
 ] sudo broccoli
 ```
 
-# Where to get Help
+# Where to get help
 
 ```
 ] broccoli -h
 ```
 
-# What to Expect
+# What to expect
 
 Follow the instructions on the screen. The app will do the following for you:
 
 - Ask the right questions ;)
 - Create a config file
-- Save it in to the Nginx directory
+- Save the config file to the Nginx directory
 - Restart Nginx
 
-We hope you'll find this app useful, and don't forget to check the source code. We took the time to write simple to understand code, so you can extend or customize the app to fit your needs.
+We hope you'll find this app useful. Don't forget to check the source code. We took the time to write easy-to-understand code that allows you to extend or customize the app to fit your needs.
 
 # Companion Software
 
-This CLI tools works well also with the following software:
+This CLI tool also works well with the following software:
 
-- [Hot Pepper](https://www.npmjs.com/package/@0x4447/hotpepper): Setup SystemD as the process manager for your NodeJS server with one simple command.
+- [Hot Pepper](https://www.npmjs.com/package/@0x4447/hotpepper): Set up SystemD as the process manager for your NodeJS server with one simple command.
 
 # The End
 
-If you enjoyed this project, please consider giving it a 🌟. And check out our [0x4447 GitHub account](https://github.com/0x4447), where you'll find additional resources you might find useful or interesting.
+If you enjoyed this project, please consider giving it a 🌟. And check out our [0x4447 GitHub account](https://github.com/0x4447), which contains additional resources you might find useful or interesting.
 
 ## Sponsor 🎊
 
