@@ -17,7 +17,7 @@ We hope you'll find Broccoli as useful as we do.
 # How to use
 
 ```
-] sudo broccoli
+] sudo broccoli -s .
 ```
 
 # Where to get help
@@ -34,8 +34,6 @@ Follow the instructions on the screen. The app will do the following for you:
 - Create a config file
 - Save the config file to the Nginx directory
 - Restart Nginx
-
-We hope you'll find this app useful. Don't forget to check the source code. We took the time to write easy-to-understand code that allows you to extend or customize the app to fit your needs.
 
 # Companion Software
 
